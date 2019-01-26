@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterPlayer : Character {
 
+    public int currentXP;
+    public int maxXP;
+
     [Header("Stuff needed for turn")]
     public CharacterEnemy myTarget;
     public CharacterAbility myAbility;
@@ -29,7 +32,12 @@ public class CharacterPlayer : Character {
             abilities[i].character = this;
         }
     }
-    
+
+
+    public void gainXP(int xp)
+    {
+
+    }
 
     public Character grabTarget(TurnManager turnManager)
     {

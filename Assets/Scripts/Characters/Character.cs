@@ -5,10 +5,11 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public string name;
-    public int level;
     public CharacterHealth health;
     public CharacterStats stats;
     public CharacterAbility ability01;
+    [Header("Level")]
+    public int level;
     protected virtual void Awake()
     {
         health = GetComponent<CharacterHealth>();

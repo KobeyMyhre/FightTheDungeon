@@ -22,6 +22,11 @@ public class CharacterHealth : MonoBehaviour
         spToFull();
     }
 
+    public void init()
+    {
+        Start();
+    }
+
     public float getCurrentHealthPercent()
     {
         return currentHealth / (float)maxHealth;

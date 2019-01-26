@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public delegate void OnEvent();
 public class TurnManager : MonoBehaviour {
 
     public static TurnManager instance;
     public Queue<Character> turnOrder;
     public List<Character> enemiesInCombat;
     public List<Character> playersInCombat;
-
+    public OnEvent onCombatOver;
     public Character current;
     public Character target;
     public CharacterAbility ability;
@@ -20,15 +20,20 @@ public class TurnManager : MonoBehaviour {
         }else { Destroy(this); }
     }
     public List<Character> testCombat;
-    private void Start()
-    {
-        StartCoroutine(waitAFrame());
-    }
+    
 
-    IEnumerator waitAFrame()
+    public void initCombat(List<CharacterPlayer> players, List<CharacterEnemy> enemies)
     {
-        yield return null;
-        initTurnOrder(testCombat);
+        List<Character> characters = new List<Character>();
+        for(int i =0; i < players.Count; i++)
+        {
+            characters.Add(players[i]);
+        }
+        for(int i =0; i < enemies.Count; i++)
+        {
+            characters.Add(enemies[i]);
+        }
+        initTurnOrder(characters);
         startCombatTurns();
     }
 
@@ -126,6 +131,9 @@ public class TurnManager : MonoBehaviour {
             yield return null;
         }
         Debug.Log("Combat over");
-
+        if(onCombatOver != null)
+        {
+            onCombatOver();
+        }
     }
 }

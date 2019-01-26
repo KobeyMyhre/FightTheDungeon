@@ -12,6 +12,12 @@ public class CharacterEnemy : Character {
     }
 
 
+    public void initEnemy()
+    {
+        Awake();
+        health.init();
+    }
+
     public override IEnumerator takeTurn(Character target, CharacterAbility ability)
     {
         yield return new WaitForSeconds(1);

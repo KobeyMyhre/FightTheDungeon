@@ -7,6 +7,8 @@ public class PartyGUI : MonoBehaviour {
     public static PartyGUI instance;
     public GameObject playerDisplayPrefab;
     public Transform playerDisplayContainer;
+
+    public List<CharacterPlayer> party;
     private void Awake()
     {
         if(instance == null)
@@ -14,7 +16,6 @@ public class PartyGUI : MonoBehaviour {
             instance = this;
         }else { Destroy(this); }
     }
-    public List<CharacterPlayer> party;
     private void Start()
     {
         StartCoroutine(waitAFrame());
@@ -27,7 +28,14 @@ public class PartyGUI : MonoBehaviour {
         {
             createNewPlayerDisplay(party[i]);
         }
-        
+    }
+
+    public void givePartyXP(int xpGain)
+    {
+        for(int i =0; i < party.Count; i++)
+        {
+            party[i].gainXP(xpGain);
+        }
     }
 
     public void createNewPlayerDisplay(CharacterPlayer player)
