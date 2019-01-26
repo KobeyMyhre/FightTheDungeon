@@ -36,7 +36,14 @@ public class CharacterPlayer : Character {
 
     public void gainXP(int xp)
     {
-
+        currentXP += xp;
+        if(currentXP >= maxXP)
+        {
+            currentXP -= maxXP;
+            maxXP += LevelUpManager.instance.xpIncreasePerLevel;
+            Debug.Log("Level Up");
+            level++;
+        }
     }
 
     public Character grabTarget(TurnManager turnManager)

@@ -32,6 +32,6 @@ public class CombatEncounter : EncountersBase {
         }
         Debug.Log("Total XP Gain: " + xpGainForParty);
         PartyGUI.instance.givePartyXP(xpGainForParty);
-        
+        base.endEncounter();
     }
 }
