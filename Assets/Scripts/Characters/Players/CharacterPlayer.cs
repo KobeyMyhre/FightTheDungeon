@@ -27,12 +27,22 @@ public class CharacterPlayer : Character {
 
     public override IEnumerator takeTurn(Character target, CharacterAbility ability)
     {
+        myAbility = null;
+        myTarget = null;
+
         myAbility = ability01;
-        while(myTarget == null || myAbility == null)
+        TurnManager.instance.ability = myAbility;
+        while (myTarget == null || myAbility == null)
         {
             yield return null;
         }
-        target = myTarget;
+        TurnManager.instance.target = myTarget;
+        
     }
 
+    public override void setTargetAndAbilty(Character target, CharacterAbility ability)
+    {
+        target = myTarget;
+        ability = myAbility;
+    }
 }

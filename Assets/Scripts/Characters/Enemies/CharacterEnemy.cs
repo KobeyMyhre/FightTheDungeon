@@ -15,7 +15,12 @@ public class CharacterEnemy : Character {
     public override IEnumerator takeTurn(Character target, CharacterAbility ability)
     {
         yield return new WaitForSeconds(1);
-        target = grabTarget(TurnManager.instance);
-        ability = ability01;
+        TurnManager.instance.target = grabTarget(TurnManager.instance);
+        TurnManager.instance.ability = ability01;
+
+    }
+    public override void setTargetAndAbilty(Character target, CharacterAbility ability)
+    {
+        
     }
 }

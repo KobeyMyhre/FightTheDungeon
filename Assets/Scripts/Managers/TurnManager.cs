@@ -10,7 +10,8 @@ public class TurnManager : MonoBehaviour {
     public List<Character> playersInCombat;
 
     public Character current;
-
+    public Character target;
+    public CharacterAbility ability;
     public void Awake()
     {
         if(instance == null)
@@ -25,12 +26,27 @@ public class TurnManager : MonoBehaviour {
         startCombatTurns();
     }
 
+    public void removeCharacterFromCombat(CharacterHealth health)
+    {
+        if(health.character is CharacterEnemy)
+        {
+            enemiesInCombat.Remove(health.character);
+        }
+        if(health.character is CharacterPlayer)
+        {
+            enemiesInCombat.Remove(health.character);
+        }
+    }
+
     public void initTurnOrder(List<Character> characters)
     {
         turnOrder = new Queue<Character>();
+        enemiesInCombat.Clear();
+        playersInCombat.Clear();
         for(int i =0; i < characters.Count; i++)
         {
             turnOrder.Enqueue(characters[i]);
+            characters[i].health.onDeath += removeCharacterFromCombat;
             if(characters[i] is CharacterEnemy)
             {
                 enemiesInCombat.Add(characters[i]);
@@ -76,15 +92,8 @@ public class TurnManager : MonoBehaviour {
             }
         }
         if(playerCount == playersInCombat.Count) { return true; }
-        int enemyCount = 0;
-        for(int i =0; i < enemiesInCombat.Count; i++)
-        {
-            if(enemiesInCombat[i].health.isDead())
-            {
-                enemyCount++;
-            }
-        }
-        return enemyCount == enemiesInCombat.Count;
+        
+        return enemiesInCombat.Count == 0;
     }
 
     IEnumerator takeTurn()
@@ -97,9 +106,10 @@ public class TurnManager : MonoBehaviour {
             
             
             
-            Character target = null;
-            CharacterAbility ability = null;
+            target = null;
+            ability = null;
             yield return current.takeTurn(target, ability);
+            
             Debug.Log(current.name + " targeted " + target.name);
             ability.useAbilty(target);
             turnOrder.Enqueue(current);

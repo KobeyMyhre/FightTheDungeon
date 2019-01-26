@@ -23,5 +23,8 @@ public class Character : MonoBehaviour
     {
         yield return null;
     }
+    public virtual void setTargetAndAbilty(Character target, CharacterAbility ability)
+    {
 
+    }
 }

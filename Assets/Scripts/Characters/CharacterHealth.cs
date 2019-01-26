@@ -12,7 +12,8 @@ public class CharacterHealth : MonoBehaviour
     public int maxSP;
     public int currentSP;
     public OnHealthChange onHealthChange;
-
+    public OnHealthChange onSPChange;
+    public OnHealthChange onDeath;
     private void Start()
     {
         updateMaxHealth();
@@ -25,10 +26,23 @@ public class CharacterHealth : MonoBehaviour
     {
         return currentHealth / (float)maxHealth;
     }
+    public float getCurrentSPPercent()
+    {
+        return currentSP / (float)maxSP;
+    }
 
     public void healToFull()
     {
         currentHealth = maxHealth;
+    }
+
+    public void changeCurrentSP(int drain)
+    {
+        currentSP -= drain;
+        if(onSPChange != null)
+        {
+            onSPChange(this);
+        }
     }
 
     public void spToFull()
@@ -54,6 +68,18 @@ public class CharacterHealth : MonoBehaviour
         if(onHealthChange != null)
         {
             onHealthChange(this);
+        }
+        if(currentHealth <= 0)
+        {
+            death();
+        }
+    }
+
+    public virtual void death()
+    {
+        if(onDeath != null)
+        {
+            onDeath(this);
         }
     }
 

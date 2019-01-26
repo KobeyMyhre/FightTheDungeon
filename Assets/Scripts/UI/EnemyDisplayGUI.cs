@@ -15,6 +15,7 @@ public class EnemyDisplayGUI : MonoBehaviour {
         name.text = enemy.name;
         updateHealthUI(enemy.health);
         enemy.health.onHealthChange += updateHealthUI;
+        enemy.health.onDeath += removeDisplay;
     }
 
     public void updateHealthUI(CharacterHealth health)
@@ -35,9 +36,10 @@ public class EnemyDisplayGUI : MonoBehaviour {
         }
     }
 
-    public void removeDisplay()
+    public void removeDisplay(CharacterHealth health)
     {
         myEnemy.health.onHealthChange -= updateHealthUI;
+        myEnemy.health.onDeath -= removeDisplay;
         Destroy(gameObject);
     }
 }
