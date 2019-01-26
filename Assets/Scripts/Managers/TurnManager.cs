@@ -22,6 +22,12 @@ public class TurnManager : MonoBehaviour {
     public List<Character> testCombat;
     private void Start()
     {
+        StartCoroutine(waitAFrame());
+    }
+
+    IEnumerator waitAFrame()
+    {
+        yield return null;
         initTurnOrder(testCombat);
         startCombatTurns();
     }
@@ -102,6 +108,10 @@ public class TurnManager : MonoBehaviour {
         while(!isCombatOver())
         {
             current = turnOrder.Dequeue();
+            while(current.health.isDead())
+            {
+                current = turnOrder.Dequeue();
+            }
             TurnManagerGUI.instance.setCurrentCharacter(current.name);
             
             

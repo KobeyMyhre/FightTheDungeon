@@ -14,7 +14,7 @@ public class PartyGUI : MonoBehaviour {
             instance = this;
         }else { Destroy(this); }
     }
-    public CharacterPlayer startPlayer;
+    public List<CharacterPlayer> party;
     private void Start()
     {
         StartCoroutine(waitAFrame());
@@ -23,7 +23,11 @@ public class PartyGUI : MonoBehaviour {
     IEnumerator waitAFrame()
     {
         yield return null;
-        createNewPlayerDisplay(startPlayer);
+        for(int i =0; i < party.Count; i++)
+        {
+            createNewPlayerDisplay(party[i]);
+        }
+        
     }
 
     public void createNewPlayerDisplay(CharacterPlayer player)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     public Character character;
+    [Header("Crit stuff")]
+    public int critBonusRoll = 0;
     [Header("Strength")]
     public int strength;
     [Header("Agility")]

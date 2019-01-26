@@ -83,7 +83,7 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
-    public bool attemptDamage(int damage, int atkStat)
+    public bool attemptDamage(int damage, int atkStat, int critBonusRoll)
     {
         int dRoll = D.R20();
         if(dRoll == 1) { return false; }
@@ -92,7 +92,7 @@ public class CharacterHealth : MonoBehaviour
         
         if (atkRoll > character.stats.agility || dRoll == 20)
         {
-            bool crit = D.R20() == 20;
+            bool crit = D.R20() >= 20 - critBonusRoll;
             damage = crit ? damage * 2 : damage;
             takeDamage(damage);
             Debug.Log("Hit");

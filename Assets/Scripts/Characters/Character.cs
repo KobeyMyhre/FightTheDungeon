@@ -9,13 +9,12 @@ public class Character : MonoBehaviour
     public CharacterHealth health;
     public CharacterStats stats;
     public CharacterAbility ability01;
-    private void Awake()
+    protected virtual void Awake()
     {
         health = GetComponent<CharacterHealth>();
         health.character = this;
         stats = GetComponent<CharacterStats>();
         stats.character = this;
-        ability01 = GetComponent<CharacterAbility>();
         ability01.character = this;
     }
 
