@@ -14,12 +14,16 @@ public class CharacterHealth : MonoBehaviour
     public OnHealthChange onHealthChange;
     public OnHealthChange onSPChange;
     public OnHealthChange onDeath;
+
+    public List<Effects> effects;
+
     private void Start()
     {
         updateMaxHealth();
         healToFull();
         updateMaxSP();
         spToFull();
+        effects = new List<Effects>();
     }
 
     public void init()
@@ -39,6 +43,10 @@ public class CharacterHealth : MonoBehaviour
     public void healToFull()
     {
         currentHealth = maxHealth;
+        if(onHealthChange != null)
+        {
+            onHealthChange(this);
+        }
     }
 
     public void changeCurrentSP(int drain)
@@ -53,6 +61,10 @@ public class CharacterHealth : MonoBehaviour
     public void spToFull()
     {
         currentSP = maxSP;
+        if(onSPChange != null)
+        {
+            onSPChange(this);
+        }
     }
 
     public void updateMaxHealth()
@@ -65,6 +77,25 @@ public class CharacterHealth : MonoBehaviour
         maxSP = character.stats.wisdom * character.stats.spPerWisdom;
     }
 
+    public void applyEffect(Effects effect)
+    {
+        if(effect.onApply(this))
+            effects.Add(effect);
+    }
+
+    public IEnumerator resolveEffects()
+    {
+        for(int i =0; i < effects.Count; i++)
+        {
+            Effects effect = effects[i];
+            effect.onTurnUpdate();
+            if(effect.displayInText)
+            {
+                CombatLogger.instance.logEffectString(effect.getLogText());
+            }
+            yield return CombatLogger.instance.isDisplaying();
+        }
+    }
 
     public virtual void takeDamage(int damage)
     {
@@ -88,21 +119,25 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
-    public bool attemptDamage(int damage, int atkStat, int critBonusRoll)
+    public bool attemptDamage(int damage, int atkStat, int critBonusRoll, Character attacker, CharacterAbility ability, bool log = true)
     {
         int dRoll = D.R20();
         if(dRoll == 1) { return false; }
-        int atkRoll = atkStat + dRoll ;
+        int atkRoll = atkStat + dRoll;
         Debug.Log("Attack Roll: " + atkRoll);
         
         if (atkRoll > character.stats.agility || dRoll == 20)
         {
             bool crit = D.R20() >= 20 - critBonusRoll;
             damage = crit ? damage * 2 : damage;
+            if(log)
+                CombatLogger.instance.logCombatString(attacker, character, ability, false, damage, crit);
             takeDamage(damage);
             Debug.Log("Hit");
             return true;
         }
+
+        CombatLogger.instance.logCombatString(attacker, character, ability, true, 0, false);
         Debug.Log("Miss");
         return false;
     }

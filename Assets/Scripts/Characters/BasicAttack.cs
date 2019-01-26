@@ -9,6 +9,7 @@ public class BasicAttack : CharacterAbility
     public override void useAbilty(Character target)
     {
         int damage = character.stats.strength * damagerPerStrength;
-        target.health.attemptDamage(damage, character.stats.strength, target.stats.critBonusRoll);
+        target.health.attemptDamage(damage, character.stats.strength, target.stats.critBonusRoll, character, this);
+        
     }
 }

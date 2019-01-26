@@ -14,6 +14,7 @@ public class EncountersManager : MonoBehaviour {
         {
             instance = this;
         }else { Destroy(this); }
+        startEncounterPanel.SetActive(true);
     }
 
 

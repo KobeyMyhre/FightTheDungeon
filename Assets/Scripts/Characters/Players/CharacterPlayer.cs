@@ -32,7 +32,10 @@ public class CharacterPlayer : Character {
             abilities[i].character = this;
         }
     }
-
+    private void Start()
+    {
+        maxXP = LevelUpManager.instance.getMaxXP(0);
+    }
 
     public void gainXP(int xp)
     {
@@ -43,6 +46,7 @@ public class CharacterPlayer : Character {
             maxXP += LevelUpManager.instance.xpIncreasePerLevel;
             Debug.Log("Level Up");
             level++;
+            LevelUpManager.instance.levelUpCharacter(this);
         }
     }
 

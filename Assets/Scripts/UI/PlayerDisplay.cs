@@ -31,7 +31,7 @@ public class PlayerDisplayGUI : MonoBehaviour {
     public void updateSPUI(CharacterHealth health)
     {
         spBar.fillAmount = health.getCurrentSPPercent();
-        spVal.text = health.currentSP + "/" + health.maxHealth;
+        spVal.text = health.currentSP + "/" + health.maxSP;
     }
     public void removeDisplay(CharacterHealth health)
     {

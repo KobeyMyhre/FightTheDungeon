@@ -118,7 +118,7 @@ public class TurnManager : MonoBehaviour {
                 current = turnOrder.Dequeue();
             }
             TurnManagerGUI.instance.setCurrentCharacter(current.name);
-            
+            yield return current.health.resolveEffects();
             
             
             target = null;
@@ -127,6 +127,7 @@ public class TurnManager : MonoBehaviour {
             
             Debug.Log(current.name + " targeted " + target.name);
             ability.useAbilty(target);
+            yield return CombatLogger.instance.isDisplaying();
             turnOrder.Enqueue(current);
             yield return null;
         }
