@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class PlayerDisplayGUI : MonoBehaviour {
+public class PlayerDisplay : MonoBehaviour {
 
     public TextMeshProUGUI name;
     public TextMeshProUGUI hpVal;
@@ -39,10 +39,5 @@ public class PlayerDisplayGUI : MonoBehaviour {
         myPlayer.health.onSPChange -= updateSPUI;
         myPlayer.health.onDeath -= removeDisplay;
         Destroy(gameObject);
-    }
-
-    public void displayStats()
-    {
-        StatsPanelGUI.instance.initStatsPanel(myPlayer.stats);
     }
 }

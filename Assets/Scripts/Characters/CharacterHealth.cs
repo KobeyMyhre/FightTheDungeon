@@ -57,7 +57,7 @@ public class CharacterHealth : MonoBehaviour
 
     public void updateMaxSP()
     {
-        maxSP = character.stats.willpower * character.stats.spPerWillpower;
+        maxSP = character.stats.wisdom * character.stats.spPerWisdom;
     }
 
 

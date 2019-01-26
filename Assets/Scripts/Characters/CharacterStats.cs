@@ -15,8 +15,8 @@ public class CharacterStats : MonoBehaviour
     [Header("Intellect")]
     public int intellect;
     [Header("Wilpower")]
-    public int willpower;
-    public int spPerWillpower;
+    public int wisdom;
+    public int spPerWisdom;
 	
 
     
