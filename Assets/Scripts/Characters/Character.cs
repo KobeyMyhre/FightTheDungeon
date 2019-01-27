@@ -10,6 +10,9 @@ public class Character : MonoBehaviour
     public CharacterAbility ability01;
     [Header("Level")]
     public int level;
+
+    [HideInInspector]
+    public bool skipTurn;
     protected virtual void Awake()
     {
         health = GetComponent<CharacterHealth>();

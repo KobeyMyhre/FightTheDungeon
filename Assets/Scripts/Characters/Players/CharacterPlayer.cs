@@ -17,7 +17,7 @@ public class CharacterPlayer : Character {
     public CharacterAbility ability04;
     public CharacterAbility ability05;
     public List<CharacterAbility> abilities;
-
+    public OnEvent onCombatOver;
     protected override void Awake()
     {
         base.Awake();
@@ -35,6 +35,16 @@ public class CharacterPlayer : Character {
     private void Start()
     {
         maxXP = LevelUpManager.instance.getMaxXP(0);
+        onCombatOver += health.spToFull;
+        onCombatOver += health.healToFull;
+        onCombatOver += health.clearStatuses;
+    }
+
+    public void combatCleanUp()
+    {
+        if(onCombatOver != null)
+            onCombatOver();
+        TurnManager.instance.onCombatOver -= combatCleanUp;
     }
 
     public void gainXP(int xp)

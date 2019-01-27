@@ -6,20 +6,22 @@ public class CombatEncounter : EncountersBase {
 
     public List<CharacterEnemy> enemyPrefabs;
     public int totalEnemies;
-
+    public List<CharacterEnemy> enemies;
     public override void startEncounter()
     {
-        List<CharacterEnemy> enemies = new List<CharacterEnemy>();
+        enemies = new List<CharacterEnemy>();
         for(int i =0; i < enemyPrefabs.Count; i++)
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[i].gameObject);
             CharacterEnemy enemy = newEnemy.GetComponent<CharacterEnemy>();
+            enemy.name = "Slime0" + (i + 1);
             enemy.initEnemy();
             enemies.Add(enemy);
         }
         totalEnemies = enemies.Count;
         TurnManager.instance.onCombatOver += endEncounter;
         TurnManager.instance.initCombat(PartyGUI.instance.party, enemies);
+        
     }
 
     public override void endEncounter()
@@ -32,6 +34,10 @@ public class CombatEncounter : EncountersBase {
         }
         Debug.Log("Total XP Gain: " + xpGainForParty);
         PartyGUI.instance.givePartyXP(xpGainForParty);
+        for(int i =0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i]);
+        }
         base.endEncounter();
     }
 }

@@ -119,27 +119,34 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
-    public bool attemptDamage(int damage, int atkStat, int critBonusRoll, Character attacker, CharacterAbility ability, bool log = true)
+    public void clearStatuses()
     {
+        effects.Clear();
+    }
+
+    public CombatResults attemptDamage(int damage, int atkStat, int critBonusRoll)
+    {
+        CombatResults retval = new CombatResults();
         int dRoll = D.R20();
-        if(dRoll == 1) { return false; }
+        if(dRoll == 1) { retval.miss = true; return retval; }
         int atkRoll = atkStat + dRoll;
         Debug.Log("Attack Roll: " + atkRoll);
         
         if (atkRoll > character.stats.agility || dRoll == 20)
         {
             bool crit = D.R20() >= 20 - critBonusRoll;
-            damage = crit ? damage * 2 : damage;
-            if(log)
-                CombatLogger.instance.logCombatString(attacker, character, ability, false, damage, crit);
-            takeDamage(damage);
+            
+            //if(log)
+              //  CombatLogger.instance.logCombatString(attacker, character, ability, false, damage, crit);
+            retval.crit = crit;
             Debug.Log("Hit");
-            return true;
+            return retval;
         }
 
-        CombatLogger.instance.logCombatString(attacker, character, ability, true, 0, false);
+        //CombatLogger.instance.logCombatString(attacker, character, ability, true, 0, false);
+        retval.miss = true;
         Debug.Log("Miss");
-        return false;
+        return retval;
     }
 
     public bool isDead()
@@ -147,3 +154,10 @@ public class CharacterHealth : MonoBehaviour
         return currentHealth <= 0;
     }
 }
+
+public class CombatResults
+{
+    public bool miss;
+    public bool crit;
+}
+

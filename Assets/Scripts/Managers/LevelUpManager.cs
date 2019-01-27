@@ -37,12 +37,16 @@ public class LevelUpManager : MonoBehaviour {
 
     public int getMaxXP(int level)
     {
-        return (xpIncreasePerLevel * level) + 100;
+        return (xpIncreasePerLevel * level) + 15;
     }
 
     public int getXPGain()
     {
-        int xpGainCalc = Random.Range(minXPGain, maxXPGain);
+        int newMinOffset = (highestLevel * xpGainDecrease);
+        int newMaxOffset = (highestLevel * xpGainDecrease);
+        newMinOffset = Mathf.Clamp(newMinOffset, 1, minXPGain);
+        newMaxOffset = Mathf.Clamp(newMaxOffset, 2, maxXPGain);
+        int xpGainCalc = Random.Range(minXPGain - newMinOffset , maxXPGain - newMaxOffset);
         float xpGainPercent = xpGainCalc / 100.0f;
         int xpGain = Mathf.RoundToInt((highestLevel * xpIncreasePerLevel) * xpGainPercent);
         Debug.Log("XP Gained:" + xpGain);

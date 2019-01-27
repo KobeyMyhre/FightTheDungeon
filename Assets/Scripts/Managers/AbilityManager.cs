@@ -38,7 +38,8 @@ public class AbilityManager : MonoBehaviour {
     public void setAbility(int idx)
     {
         if(player == null) { return; }
-        player.myAbility = player.abilities[idx];
+        if(player.abilities[idx].hasEnoughSP())
+            player.myAbility = player.abilities[idx];
     }
 
     public void showAbilityDescription(int idx)

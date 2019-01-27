@@ -39,18 +39,11 @@ public class CombatLogger : MonoBehaviour {
         StartCoroutine(displayText(log.ToCharArray()));
     }
 
-    public void logCombatString(Character attacker, Character target, CharacterAbility ability, bool miss, int damage, bool crit)
+    public void logCombatString(string log1, string log2)
     {
-        string log = attacker.name + "  used " + ability.name + ".";
-        string log2 = "";
-        if (miss) { log2 += "It Missed..."; }
-        else
-        {
-            if(crit) { log2 += "Critical Hit! "; }
-            log2 += target.name + " takes " + damage + " damage!";
-        }
+        
         loggerPanel.SetActive(true);
-        StartCoroutine(displayText(log.ToCharArray(), log2.ToCharArray()));
+        StartCoroutine(displayText(log1.ToCharArray(), log2.ToCharArray()));
     }
 
 

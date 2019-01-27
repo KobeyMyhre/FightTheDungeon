@@ -19,7 +19,6 @@ public class TurnManager : MonoBehaviour {
             instance = this;
         }else { Destroy(this); }
     }
-    public List<Character> testCombat;
     
 
     public void initCombat(List<CharacterPlayer> players, List<CharacterEnemy> enemies)
@@ -28,6 +27,7 @@ public class TurnManager : MonoBehaviour {
         for(int i =0; i < players.Count; i++)
         {
             characters.Add(players[i]);
+            onCombatOver += players[i].combatCleanUp;
         }
         for(int i =0; i < enemies.Count; i++)
         {
@@ -118,15 +118,24 @@ public class TurnManager : MonoBehaviour {
                 current = turnOrder.Dequeue();
             }
             TurnManagerGUI.instance.setCurrentCharacter(current.name);
+            StatsPanelGUI.instance.initStatsPanel(current.stats);
             yield return current.health.resolveEffects();
             
             
             target = null;
             ability = null;
-            yield return current.takeTurn(target, ability);
+            if(!current.skipTurn && !current.health.isDead())
+            {
+                yield return current.takeTurn(target, ability);
+
+                Debug.Log(current.name + " targeted " + target.name);
+                ability.useAbilty(target);
+            }
+            else
+            {
+                current.skipTurn = false;
+            }
             
-            Debug.Log(current.name + " targeted " + target.name);
-            ability.useAbilty(target);
             yield return CombatLogger.instance.isDisplaying();
             turnOrder.Enqueue(current);
             yield return null;
