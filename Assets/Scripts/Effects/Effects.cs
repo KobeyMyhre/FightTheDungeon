@@ -8,7 +8,7 @@ public class Effects
     public CharacterHealth effector;
     public Character applyer;
     public bool displayInText;
-
+    public GameObject display;
 
     public virtual string getLogText()
     {
@@ -18,6 +18,11 @@ public class Effects
 	public virtual bool onApply(CharacterHealth health)
     {
         effector = health;
+        if(effector.character is CharacterEnemy)
+        {
+            CharacterEnemy enemy = (CharacterEnemy)(effector.character);
+            display = enemy.myDisplay.displayStatus(this);
+        }
         return true;
     }
 
@@ -33,5 +38,6 @@ public class Effects
     public virtual void onExpire()
     {
         effector.effects.Remove(this);
+        StatusSpriteHolder.instance.destroyDisplay(display);
     }
 }

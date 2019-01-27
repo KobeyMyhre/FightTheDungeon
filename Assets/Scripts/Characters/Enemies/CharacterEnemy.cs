@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterEnemy : Character
 {
+    public EnemyDisplayGUI myDisplay;
     [Header("Level up vars")]
     [Range(0,3)]
     public float strPerLevel;

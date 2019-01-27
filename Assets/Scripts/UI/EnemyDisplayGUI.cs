@@ -8,6 +8,7 @@ public class EnemyDisplayGUI : MonoBehaviour {
     public TextMeshProUGUI name;
     public TextMeshProUGUI hpText;
     public Image hpBar;
+    public Transform statusBar;
     CharacterEnemy myEnemy;
 
     public void showStats()
@@ -18,6 +19,13 @@ public class EnemyDisplayGUI : MonoBehaviour {
     {
         StatsPanelGUI.instance.showOriginal();
     }
+    
+    public GameObject displayStatus(Effects effect)
+    {
+        GameObject statusDisplay = StatusSpriteHolder.instance.addStatusDisplay(effect);
+        statusDisplay.transform.parent = statusBar;
+        return statusDisplay;
+    }
 
     public void initDisplay(CharacterEnemy enemy)
     {
@@ -26,6 +34,7 @@ public class EnemyDisplayGUI : MonoBehaviour {
         updateHealthUI(enemy.health);
         enemy.health.onHealthChange += updateHealthUI;
         enemy.health.onDeath += removeDisplay;
+        enemy.myDisplay = this;
     }
 
     public void updateHealthUI(CharacterHealth health)
