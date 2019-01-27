@@ -38,7 +38,10 @@ public class CharacterPlayer : Character {
         onCombatOver += health.spToFull;
         onCombatOver += health.healToFull;
         onCombatOver += health.clearStatuses;
+
     }
+
+    
 
     public void combatCleanUp()
     {

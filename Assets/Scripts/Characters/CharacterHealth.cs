@@ -98,6 +98,16 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
+    public virtual void heal(int amnt)
+    {
+        currentHealth += amnt;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (onHealthChange != null)
+        {
+            onHealthChange(this);
+        }
+    }
+
     public virtual void takeDamage(int damage)
     {
         if (damage < 0) { damage = 0; }
@@ -122,6 +132,10 @@ public class CharacterHealth : MonoBehaviour
 
     public void clearStatuses()
     {
+        for(int i =0; i < effects.Count; i++)
+        {
+            effects[i].onExpire();
+        }
         effects.Clear();
     }
 

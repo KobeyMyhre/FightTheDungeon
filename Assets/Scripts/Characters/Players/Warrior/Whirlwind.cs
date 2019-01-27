@@ -33,6 +33,10 @@ public class Whirlwind : CharacterAbility {
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
         string log = character.name + " hit " + enemiesHit + " enemies "+ " for " + damage + " damage";
+        if(enemiesHit == 0)
+        {
+            log = "Whirlwind Missed...";
+        }
         CombatLogger.instance.logEffectString(log);
     }
 }

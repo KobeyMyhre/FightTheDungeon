@@ -34,9 +34,12 @@ public class ApplyBurnToEnemies : CharacterAbility {
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
         string log = "";
-        log += character.name + " applied burn to " + enemiesHit;
-        log += enemiesHit > 1 ? " enemies" : "enemy";
-
+        log += character.name + " applied Burn to " + enemiesHit;
+        log += enemiesHit > 1 ? " enemies" : " enemy";
+        if(enemiesHit == 0)
+        {
+            log = abilityName + " Misses...";
+        }
         CombatLogger.instance.logEffectString(log);
     }
 }

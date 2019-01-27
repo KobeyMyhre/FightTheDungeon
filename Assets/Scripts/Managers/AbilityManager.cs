@@ -23,6 +23,7 @@ public class AbilityManager : MonoBehaviour {
             instance = this;
         }else { Destroy(this); }
         abilityPanel.SetActive(false);
+        descriptionPanel.SetActive(false);
     }
 
     public void setSelectedButtonColor(Image button)

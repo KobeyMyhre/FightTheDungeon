@@ -72,37 +72,23 @@ public class CombatLogger : MonoBehaviour {
         isDisplayingText = true;
         logger.text = "";
         int idx= 0;
-        bool input = false;
         while(idx < log.Length)
         {
             logger.text += log[idx];
             idx++;
-            if (Input.GetMouseButton(0))
-            {
-                logger.text = new string(log);
-                logger.text += new string(log2);
-                break;
-            }
+           
             yield return textWait;
         }
-        if(!input)
+        yield return new WaitForSeconds(textPause);
+        idx = 0;
+        while (idx < log2.Length)
         {
-            yield return new WaitForSeconds(textPause);
-            idx = 0;
-            while (idx < log2.Length)
-            {
-                logger.text += log2[idx];
-                idx++;
-                if (Input.GetMouseButton(0))
-                {
-                    logger.text = new string(log);
-                    logger.text += new string(log2);
-                    break;
-                }
-                yield return textWait2;
-            }
+            logger.text += log2[idx];
+            idx++;
+            
+            yield return textWait2;
         }
-        
+
 
         isDisplayingText = false;
     }

@@ -20,19 +20,46 @@ public class TurnManager : MonoBehaviour {
         }else { Destroy(this); }
     }
     
+    void shufflePlayers(List<CharacterPlayer> list)
+    {
+        for(int i =0; i < list.Count; i++)
+        {
+            int r = Random.Range(0, list.Count);
+            CharacterPlayer temp = list[i];
+            list[i] = list[r];
+            list[r] = temp;
+        }
+    }
 
+    void shuffleEnemies(List<CharacterEnemy> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int r = Random.Range(0, list.Count);
+            CharacterEnemy temp = list[i];
+            list[i] = list[r];
+            list[r] = temp;
+        }
+    }
     public void initCombat(List<CharacterPlayer> players, List<CharacterEnemy> enemies)
     {
         List<Character> characters = new List<Character>();
-        for(int i =0; i < players.Count; i++)
+        shufflePlayers(players);
+        shuffleEnemies(enemies);
+        int count = players.Count > enemies.Count ? players.Count : enemies.Count;
+        for(int i =0; i < count; i++)
         {
-            characters.Add(players[i]);
-            onCombatOver += players[i].combatCleanUp;
+            if(i < players.Count)
+            {
+                characters.Add(players[i]);
+                onCombatOver += players[i].combatCleanUp;
+            }
+            if(i < enemies.Count)
+            {
+                characters.Add(enemies[i]);
+            }
         }
-        for(int i =0; i < enemies.Count; i++)
-        {
-            characters.Add(enemies[i]);
-        }
+
         initTurnOrder(characters);
         startCombatTurns();
     }
@@ -45,13 +72,16 @@ public class TurnManager : MonoBehaviour {
         }
         if(health.character is CharacterPlayer)
         {
-            enemiesInCombat.Remove(health.character);
+            playersInCombat.Remove(health.character);
         }
     }
+
+    
 
     public void initTurnOrder(List<Character> characters)
     {
         turnOrder = new Queue<Character>();
+        
         enemiesInCombat.Clear();
         playersInCombat.Clear();
         for(int i =0; i < characters.Count; i++)
