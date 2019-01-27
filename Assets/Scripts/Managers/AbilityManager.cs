@@ -9,10 +9,11 @@ public class AbilityManager : MonoBehaviour {
     public CharacterPlayer player;
     public GameObject abilityPanel;
     public List<TextMeshProUGUI> abilityNames;
+    public List<Image> abilityImage;
     public TextMeshProUGUI abilityDescription;
     public TextMeshProUGUI abilityName;
     public TextMeshProUGUI abilityCost;
-    public GameObject descriptionPanel;
+    public Image descriptionPanel;
     public Image lastPressed;
     public Color selectedColor;
     Color lastPressedColor;
@@ -23,7 +24,7 @@ public class AbilityManager : MonoBehaviour {
             instance = this;
         }else { Destroy(this); }
         abilityPanel.SetActive(false);
-        descriptionPanel.SetActive(false);
+        descriptionPanel.gameObject.SetActive(false);
     }
 
     public void setSelectedButtonColor(Image button)
@@ -41,17 +42,25 @@ public class AbilityManager : MonoBehaviour {
     public void setUpAbilityManager(CharacterPlayer currentPlayer)
     {
         player = currentPlayer;
-        for(int i =0; i < abilityNames.Count; i++)
+        setSelectedButtonColor(null);
+        for (int i =0; i < abilityNames.Count; i++)
         {
             abilityNames[i].text = currentPlayer.abilities[i].abilityName;
+            
         }
+        for(int i =0; i < abilityImage.Count; i++)
+        {
+            abilityImage[i].color = currentPlayer.color;
+        }
+        descriptionPanel.color = currentPlayer.color;
         abilityPanel.SetActive(true);
-        setSelectedButtonColor(null);
+        
     }
 
     public void removeAbilityPanel()
     {
         player = null;
+        lastPressed = null;
         abilityPanel.SetActive(false);
     }
 
@@ -69,10 +78,10 @@ public class AbilityManager : MonoBehaviour {
         abilityName.text = ability.abilityName;
         abilityCost.text = ability.spCost.ToString();
         abilityCost.color = ability.hasEnoughSP() ? Color.white : Color.red;
-        descriptionPanel.SetActive(true);
+        descriptionPanel.gameObject.SetActive(true);
     }
     public void hideAbilityDescription()
     {
-        descriptionPanel.SetActive(false);
+        descriptionPanel.gameObject.SetActive(false);
     }
 }

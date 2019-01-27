@@ -43,6 +43,7 @@ public class HealingWave : CharacterAbility
         }
         else
         {
+            if (result.crit) { log2 += "Critical Strike! "; }
             log2 += target.name + " takes " + damage + " damage. Party is healed for " + enemiesHit + ".";
         }
         CombatLogger.instance.logCombatString(log1, log2);

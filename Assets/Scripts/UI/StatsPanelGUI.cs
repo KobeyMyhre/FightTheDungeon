@@ -12,7 +12,7 @@ public class StatsPanelGUI : MonoBehaviour {
     public TextMeshProUGUI conVal;
     public TextMeshProUGUI intVal;
     public TextMeshProUGUI wisVal;
-
+    CharacterStats myStat;
     private void Awake()
     {
         if (instance == null)
@@ -22,6 +22,23 @@ public class StatsPanelGUI : MonoBehaviour {
     }
 
     public void initStatsPanel(CharacterStats stats)
+    {
+        myStat = stats;
+        name.text = stats.character.name;
+        strVal.text = stats.strength.ToString();
+        aglVal.text = stats.agility.ToString();
+        conVal.text = stats.constitution.ToString();
+        intVal.text = stats.intellect.ToString();
+        wisVal.text = stats.wisdom.ToString();
+    }
+
+    public void showOriginal()
+    {
+        if(myStat != null)
+            initStatsPanel(myStat);
+    }
+
+    public void showStatsPanel(CharacterStats stats)
     {
         name.text = stats.character.name;
         strVal.text = stats.strength.ToString();

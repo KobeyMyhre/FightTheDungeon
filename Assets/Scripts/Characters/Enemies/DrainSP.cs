@@ -24,7 +24,7 @@ public class DrainSP : EnemyAbility
     }
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log1 = character.name + " used " + abilityName + " on " + target.name + ".";
+        string log1 = character.name + " used " + abilityName + " on " + target.name + ". ";
         string log2 = "";
         if (result.miss)
         {
@@ -39,7 +39,7 @@ public class DrainSP : EnemyAbility
             }
             else
             {
-                log2 += target.name + " takes " + damage + " damage" + "and had " + enemiesHit + " SP drained.";
+                log2 += target.name + " takes " + damage + " damage and had " + enemiesHit + " SP drained.";
             }
             
         }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class TurnManagerGUI : MonoBehaviour {
 
     public static TurnManagerGUI instance;
-    public Text currentCharacter;
+    public TextMeshProUGUI currentCharacter;
     public Transform enemyDisplays;
     public GameObject enemyDisplayPrefab;
     private void Awake()

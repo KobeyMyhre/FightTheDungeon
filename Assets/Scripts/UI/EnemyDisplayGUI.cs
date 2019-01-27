@@ -9,6 +9,16 @@ public class EnemyDisplayGUI : MonoBehaviour {
     public TextMeshProUGUI hpText;
     public Image hpBar;
     CharacterEnemy myEnemy;
+
+    public void showStats()
+    {
+        StatsPanelGUI.instance.showStatsPanel(myEnemy.stats);
+    }
+    public void showOriginal()
+    {
+        StatsPanelGUI.instance.showOriginal();
+    }
+
     public void initDisplay(CharacterEnemy enemy)
     {
         myEnemy = enemy;

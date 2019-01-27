@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterPlayer : Character {
-
+    public Color color;
     public int currentXP;
     public int maxXP;
 

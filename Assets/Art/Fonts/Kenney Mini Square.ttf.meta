@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f17ba4a1190a37e4f9abd000228b2e97
+timeCreated: 1548579895
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Mini Square
+  fontNames:
+  - Kenney Mini Square
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
