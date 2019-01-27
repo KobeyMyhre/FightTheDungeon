@@ -16,6 +16,7 @@ public class Resonance : CharacterAbility {
 
     public override void useAbilty(Character target)
     {
+        base.useAbilty(target);
         int roll = Mathf.RoundToInt((character.stats.intellect + character.stats.strength) / 2.0f);
         int damage = getRoundedDamage(damagerPerCombinedStat, roll);
         int newDuration = duration;

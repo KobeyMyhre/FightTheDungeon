@@ -10,6 +10,7 @@ public class PlayerDisplayGUI : MonoBehaviour {
     public Image hpBar;
     public TextMeshProUGUI spVal;
     public Image spBar;
+    public Image xpBar;
     public CharacterPlayer myPlayer;
 
     public void initDisplay(CharacterPlayer player)
@@ -18,9 +19,16 @@ public class PlayerDisplayGUI : MonoBehaviour {
         name.text = player.name;
         updateHealthUI(player.health);
         updateSPUI(player.health);
+        updateXpBar(player);
         player.health.onHealthChange += updateHealthUI;
         player.health.onSPChange += updateSPUI;
         player.health.onDeath += removeDisplay;
+        player.onXPchange += updateXpBar;
+    }
+
+    public void updateXpBar(CharacterPlayer player)
+    {
+        xpBar.fillAmount = player.currentXP / (float)player.maxXP;
     }
 
     public void updateHealthUI(CharacterHealth health)

@@ -37,7 +37,7 @@ public class CombatEncounter : EncountersBase {
         PartyGUI.instance.givePartyXP(xpGainForParty);
         for(int i =0; i < enemies.Count; i++)
         {
-            Destroy(enemies[i]);
+            Destroy(enemies[i].gameObject);
         }
         base.endEncounter();
     }

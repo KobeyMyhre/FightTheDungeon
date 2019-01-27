@@ -17,6 +17,7 @@ public class HealingWave : CharacterAbility
 
     public override void useAbilty(Character target)
     {
+        base.useAbilty(target);
         int heal = getRoundedDamage(healPerIntellect, character.stats.intellect);
         int damage = getRoundedDamage(damagePerStrength, character.stats.strength);
         CombatResults results = target.health.attemptDamage(damage, character.stats.strength, character.stats.critBonusRoll);

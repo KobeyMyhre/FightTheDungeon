@@ -15,6 +15,7 @@ public class Smite : CharacterAbility {
 
     public override void useAbilty(Character target)
     {
+        base.useAbilty(target);
         int roll = Mathf.RoundToInt((character.stats.intellect + character.stats.strength) / 2.0f);
         int damage = getRoundedDamage(damagerPerCombined, roll);
         CombatResults result = target.health.attemptDamage(damage, character.stats.strength, target.stats.critBonusRoll);

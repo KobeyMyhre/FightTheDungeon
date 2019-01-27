@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnPlayerValChange(CharacterPlayer player);
+
 public class CharacterPlayer : Character {
     public Color color;
     public int currentXP;
@@ -18,6 +20,7 @@ public class CharacterPlayer : Character {
     public CharacterAbility ability05;
     public List<CharacterAbility> abilities;
     public OnEvent onCombatOver;
+    public OnPlayerValChange onXPchange;
     protected override void Awake()
     {
         base.Awake();
@@ -60,6 +63,10 @@ public class CharacterPlayer : Character {
             Debug.Log("Level Up");
             level++;
             LevelUpManager.instance.levelUpCharacter(this);
+        }
+        if(onXPchange != null)
+        {
+            onXPchange(this);
         }
     }
 
