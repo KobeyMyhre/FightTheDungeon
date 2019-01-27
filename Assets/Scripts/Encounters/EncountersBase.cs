@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EncountersBase : MonoBehaviour {
 
-	public virtual void startEncounter()
+    [TextArea]
+    public string into;
+
+    public virtual void startEncounter()
     {
 
     }

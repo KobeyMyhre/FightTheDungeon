@@ -21,7 +21,7 @@ public class EncountersManager : MonoBehaviour {
     GameObject getRandomEncounter()
     {
         int r = Random.Range(0, encounters.Count);
-        return encounters[r];
+        return Instantiate(encounters[r]);
     }
 
     public void startRandomEncounter()

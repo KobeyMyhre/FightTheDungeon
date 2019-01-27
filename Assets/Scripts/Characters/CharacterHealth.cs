@@ -93,6 +93,7 @@ public class CharacterHealth : MonoBehaviour
             {
                 CombatLogger.instance.logEffectString(effect.getLogText());
             }
+
             yield return CombatLogger.instance.isDisplaying();
         }
     }

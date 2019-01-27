@@ -6,6 +6,13 @@ public class ShieldBash : CharacterAbility {
 
     public float damagerPerAgility;
     public int stunDuration;
+
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(damagerPerAgility, character.stats.agility);
+        return "Deals " + damage + " damage to an enemy. Stuns them for " + stunDuration + " turn(s).";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -27,7 +34,7 @@ public class ShieldBash : CharacterAbility {
         if(result.miss) { log2 += "It Missed..."; }
         else
         {
-            if(result.crit) { log2 += "Critical Hit!"; }
+            if(result.crit) { log2 += "Critical Hit! "; }
 
             log2 += target.name + " takes " + damage + " damage and is stunned for " + stunDuration + " turns";
             

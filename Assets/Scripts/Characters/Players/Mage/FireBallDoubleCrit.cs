@@ -6,6 +6,13 @@ public class FireBallDoubleCrit : CharacterAbility {
 
     public float damagerPerIntellect;
 
+
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(damagerPerIntellect, character.stats.intellect);
+        return "Deals " + damage + " to an enemy. Crit chance is doubled.";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

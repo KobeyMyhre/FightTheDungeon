@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAbility : CharacterAbility {
-
-	public virtual bool canUseAbility(Character target)
+    public int coolDown;
+    public int currentCD;
+    public virtual bool canUseAbility(Character target)
     {
-        return true;
+        currentCD--;
+        if (currentCD <= 0)
+        {
+            currentCD = coolDown;
+            return true;
+        }
+        return false;
     }
 }

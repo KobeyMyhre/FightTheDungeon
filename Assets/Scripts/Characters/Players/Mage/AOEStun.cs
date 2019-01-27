@@ -7,6 +7,12 @@ public class AOEStun : CharacterAbility {
     public float damagePerIntellect;
     public int duration;
 
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(damagePerIntellect, character.stats.intellect);
+        return "Deals " + damage + " to all enemies and stuns them for " + duration + " turn(s).";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -28,7 +34,7 @@ public class AOEStun : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " hit " + enemiesHit + " enemies for " + damage + " damage";
+        string log = character.name + " hit " + enemiesHit + " enemies for " + damage + " damage" + " and stuns them for 1 turn";
         CombatLogger.instance.logEffectString(log);
     }
 }

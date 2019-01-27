@@ -110,6 +110,8 @@ public class TurnManager : MonoBehaviour {
     IEnumerator takeTurn()
     {
         yield return null;
+        CombatLogger.instance.logEffectString(EncountersManager.instance.currentEncounter.into);
+        yield return CombatLogger.instance.isDisplaying();
         while(!isCombatOver())
         {
             current = turnOrder.Dequeue();

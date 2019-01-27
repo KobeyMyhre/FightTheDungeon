@@ -6,6 +6,12 @@ public class Whirlwind : CharacterAbility {
 
     public float damagerPerStrength;
 
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(damagerPerStrength, character.stats.strength);
+        return "Deals " + damage + " damage to all enemies";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

@@ -6,6 +6,12 @@ public class Demoralize : CharacterAbility {
 
     public int duration;
     public int decreaseAmount;
+
+    public override string getDescription()
+    {
+        return "Applies a -" + decreaseAmount + " to all enemies strength values for " + duration + " turns.";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

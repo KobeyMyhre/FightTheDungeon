@@ -6,6 +6,13 @@ public class StrikeTwice : CharacterAbility {
 
     public float damagerPerStrength;
 
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(damagerPerStrength, character.stats.strength);
+        return "Deals " + damage + " damage twice.";
+    }
+
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -33,7 +40,7 @@ public class StrikeTwice : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " hit " + target.name + " " + enemiesHit + " times for " + damage + "damage";
+        string log = character.name + " hit " + target.name + " " + enemiesHit + " times for " + damage + " damage";
         CombatLogger.instance.logEffectString(log);
     }
 

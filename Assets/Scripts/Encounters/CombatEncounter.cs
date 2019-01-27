@@ -7,6 +7,7 @@ public class CombatEncounter : EncountersBase {
     public List<CharacterEnemy> enemyPrefabs;
     public int totalEnemies;
     public List<CharacterEnemy> enemies;
+    
     public override void startEncounter()
     {
         enemies = new List<CharacterEnemy>();
@@ -14,7 +15,7 @@ public class CombatEncounter : EncountersBase {
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[i].gameObject);
             CharacterEnemy enemy = newEnemy.GetComponent<CharacterEnemy>();
-            enemy.name = "Slime0" + (i + 1);
+            
             enemy.initEnemy();
             enemies.Add(enemy);
         }

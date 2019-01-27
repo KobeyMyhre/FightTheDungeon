@@ -6,11 +6,17 @@ public class ApplyBurnToEnemies : CharacterAbility {
 
     public float burnDamagerPerIntellect;
     public int duration;
-    
+
+    public override string getDescription()
+    {
+        int damage = getRoundedDamage(burnDamagerPerIntellect, character.stats.intellect);
+        return "Applies a burn effect to all enemies, that deals " + damage + " damage every turn for " + duration + "turns.";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
-        int damage = getRoundedDamage(burnDamagerPerIntellect, target.stats.intellect);
+        int damage = getRoundedDamage(burnDamagerPerIntellect, character.stats.intellect);
         int burnsApplied = 0;
         for(int i =0; i < TurnManager.instance.enemiesInCombat.Count; i++)
         {
