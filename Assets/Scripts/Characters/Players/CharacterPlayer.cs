@@ -38,7 +38,7 @@ public class CharacterPlayer : Character {
         onCombatOver += health.spToFull;
         onCombatOver += health.healToFull;
         onCombatOver += health.clearStatuses;
-
+        health.onDeath += removeFromParty;
     }
 
     
@@ -61,6 +61,11 @@ public class CharacterPlayer : Character {
             level++;
             LevelUpManager.instance.levelUpCharacter(this);
         }
+    }
+
+    public void removeFromParty(CharacterHealth health)
+    {
+        PartyGUI.instance.party.Remove(this);
     }
 
     public Character grabTarget(TurnManager turnManager)

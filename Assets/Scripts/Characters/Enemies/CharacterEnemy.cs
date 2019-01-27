@@ -38,7 +38,7 @@ public class CharacterEnemy : Character
     public void levelEnemy()
     {
         int highestLevel = LevelUpManager.instance.highestLevel;
-        int level = Random.Range(highestLevel + 1, highestLevel + 3);
+        int level = Random.Range(highestLevel + 2, highestLevel + 4);
         stats.strength += Mathf.RoundToInt(level * strPerLevel);
         stats.agility += Mathf.RoundToInt(level * aglPerLevel);
         stats.constitution += Mathf.RoundToInt(level * conPerLevel);

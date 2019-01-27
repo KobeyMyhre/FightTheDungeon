@@ -28,7 +28,7 @@ public class BleedStrike : EnemyAbility {
         string log2 = "";
         if(result.miss)
         {
-            log2 += "It Misses...";
+            log2 += " It Misses...";
         }
         else
         {
