@@ -15,5 +15,6 @@ public class EncountersBase : MonoBehaviour {
     public virtual void endEncounter()
     {
         EncountersManager.instance.activateProcedePanel();
+        GameOverGUI.instance.highestFloor++;
     }
 }

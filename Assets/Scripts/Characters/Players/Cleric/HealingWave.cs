@@ -36,7 +36,7 @@ public class HealingWave : CharacterAbility
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log1 = character.name + " uses " + abilityName + ". ";
+        string log1 = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " uses " + abilityName + ". ";
         string log2 = "";
         if (result.miss)
         {
@@ -44,8 +44,13 @@ public class HealingWave : CharacterAbility
         }
         else
         {
-            if (result.crit) { log2 += "Critical Strike! "; }
-            log2 += target.name + " takes " + damage + " damage. Party is healed for " + enemiesHit + ".";
+            if (result.crit)
+            {
+                log2 += RT.rt_setColor(RTColors.purple);
+                log2 += "Critical Strike! ";
+                log2 += RT.rt_endColor();
+            }
+            log2 += RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + " takes " + damage + " damage. Party is healed for " + RT.rt_setColor(RTColors.green) + enemiesHit + RT.rt_endColor() + ".";
         }
         CombatLogger.instance.logCombatString(log1, log2);
     }

@@ -12,9 +12,10 @@ public class PlayerDisplayGUI : MonoBehaviour {
     public Image spBar;
     public Image xpBar;
     public CharacterPlayer myPlayer;
-
+    Color nameStartColor;
     public void initDisplay(CharacterPlayer player)
     {
+        nameStartColor = name.color;
         myPlayer = player;
         name.text = player.name;
         updateHealthUI(player.health);
@@ -24,11 +25,17 @@ public class PlayerDisplayGUI : MonoBehaviour {
         player.health.onSPChange += updateSPUI;
         player.health.onDeath += removeDisplay;
         player.onXPchange += updateXpBar;
+        player.myDisplay = this;
     }
 
     public void updateXpBar(CharacterPlayer player)
     {
         xpBar.fillAmount = player.currentXP / (float)player.maxXP;
+    }
+
+    public void setNameColor(bool myTurn)
+    {
+        name.color = myTurn ? myPlayer.color : nameStartColor;
     }
 
     public void updateHealthUI(CharacterHealth health)

@@ -5,7 +5,8 @@ using UnityEngine;
 public delegate void OnPlayerValChange(CharacterPlayer player);
 
 public class CharacterPlayer : Character {
-    public Color color;
+    public PlayerDisplayGUI myDisplay;
+    
     public int currentXP;
     public int maxXP;
 
@@ -94,6 +95,7 @@ public class CharacterPlayer : Character {
 
     public override IEnumerator takeTurn(Character target, CharacterAbility ability)
     {
+        myDisplay.setNameColor(true);
         AbilityManager.instance.setUpAbilityManager(this);
         myAbility = null;
         myTarget = null;
@@ -107,6 +109,7 @@ public class CharacterPlayer : Character {
         TurnManager.instance.ability = myAbility;
         TurnManager.instance.target = myTarget;
         AbilityManager.instance.removeAbilityPanel();
+        myDisplay.setNameColor(false);
     }
 
     public override void setTargetAndAbilty(Character target, CharacterAbility ability)

@@ -40,8 +40,11 @@ public class StrikeTwice : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " hit " + target.name + " " + enemiesHit + " times for " + damage + " damage";
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " hit " + RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + " " + enemiesHit + " times for " + RT.rt_setColor(RTColors.red) + damage + RT.rt_endColor() + " damage";
         CombatLogger.instance.logEffectString(log);
     }
-
+    public override string getAttribute()
+    {
+        return "STR";
+    }
 }

@@ -8,7 +8,7 @@ public class Bleed : Effects {
 
     public override string getLogText()
     {
-        return effector.character.name + " takes " + damagerPerTurn + " damage from his bleed";
+        return RT.rt_setColor(effector.character.textColor) + effector.character.name + RT.rt_endColor() + " takes " + RT.rt_setColor(RTColors.red) + damagerPerTurn + RT.rt_endColor() + " damage from his bleed";
     }
 
     public override void onTurnUpdate()

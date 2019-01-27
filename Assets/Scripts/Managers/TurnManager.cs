@@ -98,6 +98,7 @@ public class TurnManager : MonoBehaviour {
                 playersInCombat.Add(characters[i]);
             }
         }
+        TurnManagerGUI.instance.updateTurnOrder(getNext3Orders());
     }
 
     public void startCombatTurns()
@@ -122,6 +123,17 @@ public class TurnManager : MonoBehaviour {
         return null;
     }
 
+    List<Color> getNext3Orders()
+    {
+        List<Color> retval = new List<Color>();
+        var temp = turnOrder.ToArray();
+        for(int i =0; i < temp.Length && i < 3; i++)
+        {
+            retval.Add(temp[i].color);
+        }
+        return retval;
+    }
+
     bool isCombatOver()
     {
         int playerCount = 0;
@@ -132,7 +144,7 @@ public class TurnManager : MonoBehaviour {
                 playerCount++;
             }
         }
-        if(playerCount == playersInCombat.Count) { return true; }
+        if(playerCount == playersInCombat.Count) { GameOverGUI.instance.triggerGameOver(); return true; }
         
         return enemiesInCombat.Count == 0;
     }
@@ -144,6 +156,7 @@ public class TurnManager : MonoBehaviour {
         yield return CombatLogger.instance.isDisplaying();
         while(!isCombatOver())
         {
+            TurnManagerGUI.instance.updateTurnOrder(getNext3Orders());
             current = turnOrder.Dequeue();
             while(current.health.isDead())
             {
@@ -171,6 +184,10 @@ public class TurnManager : MonoBehaviour {
             yield return CombatLogger.instance.isDisplaying();
             turnOrder.Enqueue(current);
             yield return null;
+        }
+        for(int i =0; i < PartyGUI.instance.party.Count; i++)
+        {
+            PartyGUI.instance.party[i].health.clearStatuses();
         }
         Debug.Log("Combat over");
         if(onCombatOver != null)

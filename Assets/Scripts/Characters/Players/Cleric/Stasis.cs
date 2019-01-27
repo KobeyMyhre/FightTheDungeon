@@ -24,7 +24,7 @@ public class Stasis : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log1 = character.name + " uses " + abilityName + ".";
+        string log1 = character.name + " uses " + abilityName + " on " + RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + ".";
         string log2 = "";
         if (result.miss)
         {

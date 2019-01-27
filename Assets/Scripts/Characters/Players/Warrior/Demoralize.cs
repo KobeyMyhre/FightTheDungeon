@@ -11,7 +11,10 @@ public class Demoralize : CharacterAbility {
     {
         return "Applies a -" + decreaseAmount + " to all enemies strength values for " + duration + " turns.";
     }
-
+    public override string getAttribute()
+    {
+        return "STR";
+    }
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -30,7 +33,7 @@ public class Demoralize : CharacterAbility {
     }
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " reduced the " + Stat.Str + " of " + enemiesHit + " enemies by " + damage;
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " reduced the " + Stat.Str + " of " + enemiesHit + " enemies by " + damage;
         CombatLogger.instance.logEffectString(log);
     }
 }

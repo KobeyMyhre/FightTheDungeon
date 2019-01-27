@@ -36,7 +36,7 @@ public class Resonance : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log1 = character.name + " uses " + abilityName + ". ";
+        string log1 = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " uses " + abilityName + ". ";
         string log2 = "";
         if (result.miss)
         {
@@ -44,7 +44,7 @@ public class Resonance : CharacterAbility {
         }
         else
         {
-            log2 += target.name + " takes " + damage + " damage. Party Agility is boosted by " + agiltyBoost + " for " + enemiesHit + " turns";
+            log2 += RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + " takes " + RT.rt_setColor(RTColors.red) + damage + RT.rt_endColor() + " damage. Party Agility is boosted by " + agiltyBoost + " for " + enemiesHit + " turns";
         }
         CombatLogger.instance.logCombatString(log1, log2);
     }

@@ -12,7 +12,10 @@ public class ApplyBurnToEnemies : CharacterAbility {
         int damage = getRoundedDamage(burnDamagerPerIntellect, character.stats.intellect);
         return "Applies a burn effect to all enemies, that deals " + damage + " damage every turn for " + duration + "turns.";
     }
-
+    public override string getAttribute()
+    {
+        return "INT";
+    }
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -34,7 +37,7 @@ public class ApplyBurnToEnemies : CharacterAbility {
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
         string log = "";
-        log += character.name + " applied Burn to " + enemiesHit;
+        log += RT.rt_setColor(character.textColor)+ character.name +RT.rt_endColor() + " applied Burn to " + enemiesHit;
         log += enemiesHit > 1 ? " enemies" : " enemy";
         if(enemiesHit == 0)
         {

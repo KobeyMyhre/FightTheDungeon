@@ -13,6 +13,11 @@ public class AOEStun : CharacterAbility {
         return "Deals " + damage + " to all enemies and stuns them for " + duration + " turn(s).";
     }
 
+    public override string getAttribute()
+    {
+        return "INT";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
@@ -34,7 +39,7 @@ public class AOEStun : CharacterAbility {
 
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " hit " + enemiesHit + " enemies for " + damage + " damage" + " and stuns them for 1 turn";
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " hit " + enemiesHit + " enemies for " + RT.rt_setColor(RTColors.red) + damage + RT.rt_endColor() + " damage" + " and stuns them for 1 turn";
         CombatLogger.instance.logEffectString(log);
     }
 }

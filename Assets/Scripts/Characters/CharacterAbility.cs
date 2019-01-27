@@ -14,16 +14,26 @@ public class CharacterAbility : MonoBehaviour
     {
         character.health.changeCurrentSP(spCost);
     }
+
+    public virtual string getAttribute()
+    {
+        return "";
+    }
     
     public virtual void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " used " + abilityName + ".";
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " used " + abilityName + ".";
         string log2 = "";
         if (result.miss) { log2 += "It Missed..."; }
         else
         {
-            if (result.crit) { log2 += "Critical Hit! "; }
-            log2 += target.name + " takes " + damage + " damage!";
+            if (result.crit)
+            {
+                log2 += RT.rt_setColor(RTColors.purple);
+                log2 += "Critical Hit! ";
+                log2 += RT.rt_endColor();
+            }
+            log2 += RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + " takes " + RT.rt_setColor(RTColors.red) + damage + RT.rt_endColor() + " damage!";
         }
         CombatLogger.instance.logCombatString(log, log2);
     }

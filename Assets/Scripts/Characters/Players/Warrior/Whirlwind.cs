@@ -29,10 +29,13 @@ public class Whirlwind : CharacterAbility {
         }
         sendCombatLog(null, null, damage, enemiesHit);
     }
-
+    public override string getAttribute()
+    {
+        return "STR";
+    }
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = character.name + " hit " + enemiesHit + " enemies "+ " for " + damage + " damage";
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " hit " + enemiesHit + " enemies "+ " for " + RT.rt_setColor(RTColors.red) + damage +RT.rt_endColor() + " damage";
         if(enemiesHit == 0)
         {
             log = "Whirlwind Missed...";

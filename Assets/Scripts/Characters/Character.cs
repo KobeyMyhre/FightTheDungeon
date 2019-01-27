@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public Color color;
+    public RTColors textColor;
     public string name;
     public CharacterHealth health;
     public CharacterStats stats;

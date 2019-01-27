@@ -9,6 +9,7 @@ public class TurnManagerGUI : MonoBehaviour {
     public TextMeshProUGUI currentCharacter;
     public Transform enemyDisplays;
     public GameObject enemyDisplayPrefab;
+    public Image[] turnOrderImages;
     private void Awake()
     {
         if (instance == null)
@@ -16,6 +17,14 @@ public class TurnManagerGUI : MonoBehaviour {
             instance = this;
         }
         else { Destroy(this); }
+    }
+
+    public void updateTurnOrder(List<Color> order)
+    {
+        for(int i =0; i < order.Count;i++)
+        {
+            turnOrderImages[i].color = order[i];
+        }
     }
 
     public void setCurrentCharacter(string name)

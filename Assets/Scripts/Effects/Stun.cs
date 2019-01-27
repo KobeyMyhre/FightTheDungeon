@@ -6,7 +6,7 @@ public class Stun : Effects {
 
     public override string getLogText()
     {
-        return effector.character.name + " is Stunned!";
+        return RT.rt_setColor(effector.character.textColor) + effector.character.name + RT.rt_endColor() + " is Stunned!";
     }
     public override void onTurnUpdate()
     {

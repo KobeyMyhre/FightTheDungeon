@@ -53,14 +53,30 @@ public class CombatLogger : MonoBehaviour {
         isDisplayingText = true;
         logger.text = "";
         int idx = 0;
+        bool keepGoing = false;
         while (idx < log.Length)
         {
-            logger.text += log[idx];
-            idx++;
-            if(Input.GetMouseButton(0))
+            if (log[idx] == '<')
+                keepGoing = true;
+            if (keepGoing)
             {
-                logger.text = new string(log);
-                break;
+                while (keepGoing)
+                {
+                    if (log[idx] == '>')
+                    {
+                        keepGoing = false;
+                    }
+                    logger.text += log[idx];
+                    idx++;
+                }
+            }
+            else
+            {
+                if (!keepGoing)
+                {
+                    logger.text += log[idx];
+                    idx++;
+                }
             }
             yield return textWait;
         }
@@ -72,10 +88,34 @@ public class CombatLogger : MonoBehaviour {
         isDisplayingText = true;
         logger.text = "";
         int idx= 0;
+        bool keepGoing = false;
         while(idx < log.Length)
         {
-            logger.text += log[idx];
-            idx++;
+            if (log[idx] == '<')
+                keepGoing = true;
+            if(keepGoing)
+            {
+                while (keepGoing)
+                {
+                    if (log[idx] == '>')
+                    {
+                        keepGoing = false;
+                    }
+                    logger.text += log[idx];
+                    idx++;
+                }
+            }
+            else
+            {
+                if (!keepGoing)
+                {
+                    logger.text += log[idx];
+                    idx++;
+                }
+            }
+            
+            
+            
            
             yield return textWait;
         }
@@ -83,10 +123,28 @@ public class CombatLogger : MonoBehaviour {
         idx = 0;
         while (idx < log2.Length)
         {
-            logger.text += log2[idx];
-            idx++;
-            
-            yield return textWait2;
+            if (log2[idx] == '<')
+                keepGoing = true;
+            if (keepGoing)
+            {
+                while (keepGoing)
+                {
+                    if (log2[idx] == '>')
+                    {
+                        keepGoing = false;
+                    }
+                    logger.text += log2[idx];
+                    idx++;
+                }
+            }
+            else
+            {
+                if (!keepGoing)
+                {
+                    logger.text += log2[idx];
+                    idx++;
+                }
+            }
         }
 
 

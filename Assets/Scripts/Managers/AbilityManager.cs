@@ -13,6 +13,7 @@ public class AbilityManager : MonoBehaviour {
     public TextMeshProUGUI abilityDescription;
     public TextMeshProUGUI abilityName;
     public TextMeshProUGUI abilityCost;
+    public TextMeshProUGUI attribute;
     public Image descriptionPanel;
     public Image lastPressed;
     public Color selectedColor;
@@ -78,6 +79,7 @@ public class AbilityManager : MonoBehaviour {
         abilityName.text = ability.abilityName;
         abilityCost.text = ability.spCost.ToString();
         abilityCost.color = ability.hasEnoughSP() ? Color.white : Color.red;
+        attribute.text = ability.getAttribute();
         descriptionPanel.gameObject.SetActive(true);
     }
     public void hideAbilityDescription()

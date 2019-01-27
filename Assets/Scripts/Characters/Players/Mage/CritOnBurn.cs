@@ -11,7 +11,10 @@ public class CritOnBurn : CharacterAbility
         int damage = getRoundedDamage(damagerPerIntellect, character.stats.intellect);
         return "Deals " + damage + " to an enemy. Always crits if enemy is burning.";
     }
-
+    public override string getAttribute()
+    {
+        return "INT";
+    }
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);
