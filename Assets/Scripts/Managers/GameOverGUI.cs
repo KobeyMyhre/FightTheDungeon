@@ -18,6 +18,14 @@ public class GameOverGUI : MonoBehaviour {
         gameOverPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F12))
+        {
+            triggerGameOver();
+        }
+    }
+
     public void triggerGameOver()
     {
         gameOverPanel.SetActive(true);

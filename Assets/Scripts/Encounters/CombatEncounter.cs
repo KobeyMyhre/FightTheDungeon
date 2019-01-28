@@ -15,7 +15,7 @@ public class CombatEncounter : EncountersBase {
         {
             GameObject newEnemy = Instantiate(enemyPrefabs[i].gameObject);
             CharacterEnemy enemy = newEnemy.GetComponent<CharacterEnemy>();
-            enemy.name += " 0" + (i + 1).ToString();
+            //enemy.name += " 0" + (i + 1).ToString();
             enemy.initEnemy();
             enemies.Add(enemy);
         }

@@ -121,6 +121,7 @@ public class CombatLogger : MonoBehaviour {
         }
         yield return new WaitForSeconds(textPause);
         idx = 0;
+        keepGoing = false;
         while (idx < log2.Length)
         {
             if (log2[idx] == '<')
@@ -145,6 +146,7 @@ public class CombatLogger : MonoBehaviour {
                     idx++;
                 }
             }
+            yield return textWait2;
         }
 
 

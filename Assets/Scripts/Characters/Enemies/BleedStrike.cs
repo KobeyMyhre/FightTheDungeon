@@ -24,11 +24,11 @@ public class BleedStrike : EnemyAbility {
     
     public override void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log1 = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " used " + abilityName + " on " + RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + ".";
+        string log1 = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " used " + abilityName + " on " + RT.rt_setColor(target.textColor) + target.name + RT.rt_endColor() + ". ";
         string log2 = "";
         if(result.miss)
         {
-            log2 += " It Misses...";
+            log2 += "It Misses...";
         }
         else
         {

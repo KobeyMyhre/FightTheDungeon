@@ -17,6 +17,7 @@ public class EncountersManager : MonoBehaviour {
         startEncounterPanel.SetActive(true);
     }
 
+  
 
     GameObject getRandomEncounter()
     {
