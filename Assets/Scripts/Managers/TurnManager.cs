@@ -129,7 +129,8 @@ public class TurnManager : MonoBehaviour {
         var temp = turnOrder.ToArray();
         for(int i =0; i < temp.Length && i < 3; i++)
         {
-            retval.Add(temp[i].color);
+            if(!temp[i].health.isDead())
+                retval.Add(temp[i].color);
         }
         return retval;
     }
@@ -183,6 +184,7 @@ public class TurnManager : MonoBehaviour {
             
             yield return CombatLogger.instance.isDisplaying();
             turnOrder.Enqueue(current);
+            TurnManagerGUI.instance.updateTurnOrder(getNext3Orders());
             yield return null;
         }
         for(int i =0; i < PartyGUI.instance.party.Count; i++)

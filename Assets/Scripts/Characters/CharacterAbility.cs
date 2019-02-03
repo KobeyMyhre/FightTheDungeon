@@ -22,7 +22,7 @@ public class CharacterAbility : MonoBehaviour
     
     public virtual void sendCombatLog(CombatResults result, Character target, int damage, int enemiesHit = 1)
     {
-        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " used " + abilityName + ".";
+        string log = RT.rt_setColor(character.textColor) + character.name + RT.rt_endColor() + " used " + abilityName + ". ";
         string log2 = "";
         if (result.miss) { log2 += "It Missed..."; }
         else
@@ -37,6 +37,8 @@ public class CharacterAbility : MonoBehaviour
         }
         CombatLogger.instance.logCombatString(log, log2);
     }
+
+    
 
     protected int getRoundedDamage(float damagePer, int stat)
     {

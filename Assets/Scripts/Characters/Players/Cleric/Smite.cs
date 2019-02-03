@@ -13,6 +13,11 @@ public class Smite : CharacterAbility {
         return "Deals " + damage + " damage.";
     }
 
+    public override string getAttribute()
+    {
+        return "STR/INT";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

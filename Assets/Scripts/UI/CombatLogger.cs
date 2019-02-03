@@ -11,6 +11,7 @@ public class CombatLogger : MonoBehaviour {
     public float textPause;
     WaitForSeconds textWait;
     WaitForSeconds textWait2;
+    public float textDuration;
     private void Awake()
     {
         if(instance == null)
@@ -50,6 +51,8 @@ public class CombatLogger : MonoBehaviour {
 
     IEnumerator displayText(char[] log)
     {
+        float delay = textDuration / log.Length;
+        textWait = new WaitForSeconds(delay);
         isDisplayingText = true;
         logger.text = "";
         int idx = 0;
@@ -85,6 +88,10 @@ public class CombatLogger : MonoBehaviour {
     }
     IEnumerator displayText(char[] log, char[] log2)
     {
+        float delay1 = (textDuration * .65f) / log.Length;
+        textWait = new WaitForSeconds(delay1);
+        float delay2 = (textDuration * .35f) / log2.Length;
+        textWait2 = new WaitForSeconds(delay2);
         isDisplayingText = true;
         logger.text = "";
         int idx= 0;

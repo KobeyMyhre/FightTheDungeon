@@ -10,6 +10,11 @@ public class Stasis : CharacterAbility {
         return "Stuns the target for " + stunDuration + " turns.";
     }
 
+    public override string getAttribute()
+    {
+        return "N/A";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

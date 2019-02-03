@@ -14,6 +14,11 @@ public class Resonance : CharacterAbility {
         return "Deals " + damage + " damage to an enemy. Boosts party Agility by " + agiltyBoost + " for " + duration + " turns.";
     }
 
+    public override string getAttribute()
+    {
+        return "STR/INT";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

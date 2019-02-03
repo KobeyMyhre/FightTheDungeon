@@ -22,6 +22,10 @@ public class EncountersManager : MonoBehaviour {
     GameObject getRandomEncounter()
     {
         int r = Random.Range(0, encounters.Count);
+        if(Input.GetKey(KeyCode.B))
+        {
+            r = 7;
+        }
         return Instantiate(encounters[r]);
     }
 

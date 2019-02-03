@@ -15,6 +15,11 @@ public class HealingWave : CharacterAbility
         return "Deals " + damage + " to an enemy. Heals the party for " + heal + ".";
     }
 
+    public override string getAttribute()
+    {
+        return "STR/INT";
+    }
+
     public override void useAbilty(Character target)
     {
         base.useAbilty(target);

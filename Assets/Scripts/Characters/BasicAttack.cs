@@ -13,6 +13,11 @@ public class BasicAttack : CharacterAbility
         return "Deals " + damage + " damage.";
     }
 
+    public override string getAttribute()
+    {
+        return "STR";
+    }
+
     public override void useAbilty(Character target)
     {
         int damage = getRoundedDamage(damagerPerStrength, character.stats.strength);
